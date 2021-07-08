@@ -9,25 +9,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
-public class FamilyMember {
+@ToString   
+public class PrivateDetails {
     
+    @Column(name="identity_number", unique = true)
+    private int identityNumber;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    /* age attribute should be an Integer rather than primitive int,
-       since an employee not necessarily has family members,
-       the embedded field might be nullable
-    */
+    @Column(name = "surname", nullable = false)
+    private String surname;
+
     @Column(name = "age", nullable = false)
-    private Integer age;
-
-    @Column(name = "relation", nullable = false)
-    private FamilyRelation relation;
+    private int age;
 }
-

@@ -15,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Address {
+public class ContactDetails {
     
     @Column(name = "city", nullable = false)
     private String city;
@@ -25,5 +25,8 @@ public class Address {
 
     @Column(name = "house_number", nullable = false)
     private int houseNumber;
+
+    @Column(name = "phone_number", nullable = false, unique = true)
+    private String phoneNumber;
 
 }
