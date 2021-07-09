@@ -2,8 +2,7 @@ package com.employees.springboot.entities.employee;
 
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.employees.springboot.entities.embeddables.ContactDetails;
-import com.employees.springboot.entities.embeddables.FamilyMember;
+import com.employees.springboot.entities.embeddables.Spouse;
+
+import org.springframework.lang.Nullable;
+
+import com.employees.springboot.entities.embeddables.Child;
 import com.employees.springboot.entities.embeddables.PrivateDetails;
 
 
@@ -47,25 +50,13 @@ public class Employee {
     private ContactDetails contactDetails;
 
     @Embedded
+    @Nullable
     @ToString.Exclude
-    @AttributeOverrides(
-        {
-            @AttributeOverride( name = "firstName", column = @Column(name = "spouse_first_name")),
-            @AttributeOverride( name = "age", column = @Column(name = "spouse_age")),
-            @AttributeOverride( name = "identityNumber", column = @Column(name = "spouse_id"))
-        }
-    )
-    private FamilyMember spouse;
+    private Spouse spouse;
 
     @Embedded
+    @Nullable
     @ToString.Exclude
-    @AttributeOverrides(
-        {
-            @AttributeOverride( name = "firstName", column = @Column(name = "child_first_name")),
-            @AttributeOverride( name = "age", column = @Column(name = "child_age")),
-            @AttributeOverride( name = "identityNumber", column = @Column(name = "child_id"))
-        }
-    )
-    private List<FamilyMember> children;
+    private List<Child> children;
 
 }
