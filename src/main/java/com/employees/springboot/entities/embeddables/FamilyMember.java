@@ -2,9 +2,10 @@ package com.employees.springboot.entities.embeddables;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
+import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class FamilyMember {
     
     @Column(name = "first_name", nullable = false)
     @Pattern(regexp = "\\D{2,}", message = "First name should be longer than 1 charachter")
+    @ApiModelProperty(notes = "First name must be longer than 1 charachter and contain only letters")
     private String firstName;
 
     /* age attribute should be an Integer rather than primitive int,
@@ -31,7 +33,13 @@ public class FamilyMember {
     private Integer age;
 
     @Column(name = "relation", nullable = false)
+    @ApiModelProperty(allowableValues = "CHILD, SPOUSE")
     private FamilyRelation relation;
+
+    @Id
+    @Pattern(regexp = "^\\d{9}$", message = "Valid ID has exactly 9 digits")
+    @ApiModelProperty(notes = "Valid ID has exactly 9 digits")
+    private int identityNumber;
 
 }
 
