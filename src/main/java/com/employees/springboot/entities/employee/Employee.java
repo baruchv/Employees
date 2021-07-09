@@ -42,6 +42,7 @@ public class Employee {
     private ContactDetails contactDetails;
 
     @Embedded
+    @ToString.Exclude
     @AttributeOverrides(
         {
             @AttributeOverride( name = "firstName", column = @Column(name = "relative_first_name")),

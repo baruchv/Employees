@@ -3,6 +3,8 @@ package com.employees.springboot.entities.embeddables;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ import lombok.ToString;
 public class FamilyMember {
     
     @Column(name = "first_name", nullable = false)
+    @Pattern(regexp = "\\D{2,}", message = "First name should be longer than 1 charachter")
     private String firstName;
 
     /* age attribute should be an Integer rather than primitive int,
