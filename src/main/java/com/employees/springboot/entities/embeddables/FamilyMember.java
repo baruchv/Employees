@@ -32,5 +32,6 @@ public class FamilyMember {
 
     @Column(name = "relation", nullable = false)
     private FamilyRelation relation;
+
 }
 
