@@ -15,6 +15,7 @@ import com.employees.springboot.entities.embeddables.ContactDetails;
 import com.employees.springboot.entities.embeddables.FamilyMember;
 import com.employees.springboot.entities.embeddables.PrivateDetails;
 
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -49,12 +50,22 @@ public class Employee {
     @ToString.Exclude
     @AttributeOverrides(
         {
-            @AttributeOverride( name = "firstName", column = @Column(name = "relative_first_name")),
-            @AttributeOverride( name = "age", column = @Column(name = "relative_age")),
-            @AttributeOverride( name = "relation", column = @Column(name = "relation")),
-            @AttributeOverride( name = "identityNumber", column = @Column(name = "relative_id"))
+            @AttributeOverride( name = "firstName", column = @Column(name = "spouse_first_name")),
+            @AttributeOverride( name = "age", column = @Column(name = "spouse_age")),
+            @AttributeOverride( name = "identityNumber", column = @Column(name = "spouse_id"))
         }
     )
-    private List<FamilyMember> familyMembers;
+    private FamilyMember spouse;
+
+    @Embedded
+    @ToString.Exclude
+    @AttributeOverrides(
+        {
+            @AttributeOverride( name = "firstName", column = @Column(name = "child_first_name")),
+            @AttributeOverride( name = "age", column = @Column(name = "child_age")),
+            @AttributeOverride( name = "identityNumber", column = @Column(name = "child_id"))
+        }
+    )
+    private List<FamilyMember> children;
 
 }

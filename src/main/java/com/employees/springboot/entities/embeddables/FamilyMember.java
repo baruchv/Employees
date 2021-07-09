@@ -32,9 +32,6 @@ public class FamilyMember {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "relation", nullable = false)
-    @ApiModelProperty(allowableValues = "CHILD, SPOUSE")
-    private FamilyRelation relation;
 
     @Id
     @Pattern(regexp = "^\\d{9}$", message = "Valid ID has exactly 9 digits")
