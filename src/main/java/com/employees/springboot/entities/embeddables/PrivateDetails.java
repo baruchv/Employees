@@ -7,18 +7,14 @@ import javax.persistence.Embeddable;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString   
+@Data  
 public class PrivateDetails {
     
     @Column(name="identity_number", unique = true)
