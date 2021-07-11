@@ -1,12 +1,12 @@
 package com.employees.springboot.entities.embeddables;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
-
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,27 +18,41 @@ import lombok.NoArgsConstructor;
 @Data
 public class Spouse {
     
-    @Embedded
-    @AttributeOverrides(
-        {
-            @AttributeOverride(name = "identityNumber", column = @Column(name = "spouse_id")),
-            @AttributeOverride(name = "firstName", column = @Column(name = "spouse_first_name")),
-            @AttributeOverride(name = "surname", column = @Column(name = "spouse_surname")),
-            @AttributeOverride(name = "age", column = @Column(name = "spouse_age"))
-        }
-    )
-    private PrivateDetails privateDetails;
+    @Pattern(regexp = "^\\d{9}$", message = "Valid ID has exactly 9 digits")
+    @ApiModelProperty(notes = "Valid ID has exactly 9 digits")
+    private int identityNumber;
 
-    @Embedded
-    @AttributeOverrides(
-        {
-            @AttributeOverride(name = "city", column = @Column(name = "spouse_city")),
-            @AttributeOverride(name = "street", column = @Column(name = "spouse_street")),
-            @AttributeOverride(name = "houseNumber", column = @Column(name = "spouse_house_number")),
-            @AttributeOverride(name = "mobilePhoneNumber", column = @Column(name = "spouse_mobile_phone_number")),
-            @AttributeOverride(name = "email", column = @Column(name = "spouse_email"))
-        }
-    )
-    private ContactDetails contactDetails;
+    @Pattern(regexp = "\\D{2,}", message = "First name should be longer than 1 charachter")
+    @ApiModelProperty(notes = "First name must be longer than 1 charachter and contain only letters")
+    private String firstName;
+
+    @Pattern(regexp = "\\D{2,}", message = "Surname should be longer than 1 charachter")
+    @ApiModelProperty(notes = "Surname must be longer than 1 charachter and contain only letters")
+    private String surname;
+
+    @PositiveOrZero
+    @ApiModelProperty(notes = "Age cannot be negative")
+    private int age;
+
+    @Pattern(regexp = "\\D{2,}", message = "City name should be longer than 1 charachter, and contain only letters")
+    @ApiModelProperty(notes = "City field must be longer than 1 charachter, and contains only letters")
+    private String city;
+    
+    @Pattern(regexp = "\\D{2,}", message = "Street name should be longer than 1 charachter")
+    @ApiModelProperty(notes = "Street field must be longer than 1 charachter, and contains only letters")
+    private String street;
+
+    @Positive
+    @ApiModelProperty(notes = "Age should be positive")
+    private int houseNumber;
+
+    @Pattern(regexp = "\\d{10}", message = "A valid phone number contains excactly 10 digits")
+    @ApiModelProperty(notes =  "A valid phone number contains excactly 10 digits")
+    private String mobilePhoneNumber;
+
+    @Email(message = "Email address should be valid")
+    private String email;
+
+    
 }
 

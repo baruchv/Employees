@@ -1,11 +1,8 @@
 package com.employees.springboot.entities.embeddables;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,14 +14,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Child {
-    @Embedded
-    @AttributeOverrides(
-        {
-            @AttributeOverride(name = "identityNumber", column = @Column(name = "child_id")),
-            @AttributeOverride(name = "firstName", column = @Column(name = "child_first_name")),
-            @AttributeOverride(name = "surname", column = @Column(name = "child_first_name")),
-            @AttributeOverride(name = "age", column = @Column(name = "child_age"))
-        }
-    )
-    private PrivateDetails details;
+    
+    @Pattern(regexp = "^\\d{9}$", message = "Valid ID has exactly 9 digits")
+    private int identityNumber;
+
+    @Pattern(regexp = "\\D{2,}", message = "First name should be longer than 1 charachter")
+    private String firstName;
+
+    @Pattern(regexp = "\\D{2,}", message = "Surname should be longer than 1 charachter")
+    private String surname;
+
+    @PositiveOrZero
+    private int age;
 }
